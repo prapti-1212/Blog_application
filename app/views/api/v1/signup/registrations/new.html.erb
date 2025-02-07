@@ -1,0 +1,137 @@
+<head>
+  <title>Sign Up - Blog Application</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Centering the form */
+    .signup-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    /* Form Field Styles */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    .field input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    /* Error messages */
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    /* Submit Button */
+    .field input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .field input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Links below the form */
+    .signup-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .signup-links a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 14px;
+      margin: 0 5px;
+    }
+
+    .signup-links a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="signup-container">
+    <h2>Sign up</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Enter your email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "Enter your password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm your password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
+    <% end %>
+
+    <div class="signup-links">
+      <%= render "users/shared/links" %>
+    </div>
+  </div>
+
+</body>

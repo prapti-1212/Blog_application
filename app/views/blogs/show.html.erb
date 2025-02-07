@@ -1,0 +1,44 @@
+<head>
+  <title>Blog Details</title>
+</head>
+<body>
+  <h1 class="blog-heading">Blog Details</h1>
+  <div id="blog-details" class="blog-details">
+    <h2 class="blog-title"><%= @blog.title %></h2>
+    <p class="blog-content"><%= @blog.content %></p>
+    <% if current_user.id == @blog.user_id %>
+      <div class="blog-actions">
+        <%= link_to "Edit Blog", edit_blog_path(@blog), class: "btn edit-btn" %>
+        <%= button_to "Delete Blog", blog_path(@blog), method: :delete, class: "btn delete-btn" %>
+      </div>
+    <% end %>
+    <%= link_to "Back", my_page_index_path, class: "btn back-btn" %>
+  </div>
+  <div id="comments-section" class="comments-section">
+    <h3 class="comments-heading">Comments</h3>
+    <% @blog.comments.each do |comment| %>
+      <div class="comment-box">
+        <p class="comment-content"><%= comment.content %></p>
+        <% if current_user.id == @blog.user_id  %>
+          <div class="comment-actions">
+            <%= button_to "Delete Comment", blog_comment_path(@blog, comment), method: :delete, class: "btn delete-btn" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <div id="add-comment" class="add-comment">
+      <h3 class="add-comment-heading">Add a Comment</h3>
+      <%= form_with model: [@blog, @blog.comments.new], local: true do |form| %>
+        <div class="form-group">
+          <%= form.label :content, "Your Comment", class: "form-label" %>
+          <%= form.text_area :content, rows: 3, class: "form-control", required: true %>
+        </div>
+        <%= form.submit "Post Comment", class: "btn comment-btn" %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="login-prompt">You must be logged in to add a comment.</p>
+  <% end %>
+</body>

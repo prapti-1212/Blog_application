@@ -1,0 +1,47 @@
+<head>
+  <title>Welcome Back</title>
+  <style>
+    /* Add Navbar Styling */
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%= link_to "New Blog", new_blog_path, class: "btn new-blog-btn" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "My Blogs", my_blogs_blogs_path, class: "btn my-blog-btn" %>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn signout-btn", id: "logout-link" %>
+      </li>
+    </ul>
+  </nav>
+  <h1 class="welcome-heading">Welcome back!!!!!!</h1>
+  <h2 class="blog-heading">BLOGS</h2>
+  <div id="blog">
+    <% if @blogs.present? %>
+      <% @blogs.each do |b| %>
+        <div>
+          <%= link_to b.title, blog_path(b), class: "blog-link" %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No blogs found.</p>
+    <% end %>
+  </div>
+  <script>
+    // Logout Confirmation Prompt
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("logout-link").addEventListener("click", function(e) {
+        var confirmation = confirm("Are you sure you want to log out?");
+        if (!confirmation) {
+          e.preventDefault();  // Prevent logout
+        }
+      });
+    });
+  </script>
+</body>

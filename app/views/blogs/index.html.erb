@@ -1,0 +1,50 @@
+<head>
+  <title>Blog Details</title>
+</head>
+<body>
+  <h1>Blog Details</h1>
+  <!-- Blog Title and Content -->
+  <div id="blog-details">
+    <h2><%= @blog.title %></h2>
+    <p><%= @blog.content %></p>
+    <!-- Edit and Delete Options for Blog if the user is the owner -->
+    <% if current_user.id == @blog.user_id %>
+      <div class="blog-actions">
+        <%= link_to "Edit Blog", edit_blog_path(@blog), class: "btn edit-btn" %>
+        <%= button_to "Delete Blog", blog_path(@blog), method: :delete, class: "btn delete-btn", data: { confirm: "Are you sure you want to delete this blog?" } %>
+      </div>
+    <% end %>
+    <!-- Link back to user page or list of blogs -->
+    <%= link_to "Back", my_page_index_path, class: "btn edit-btn" %>
+  </div>
+  <!-- Comments Section -->
+  <div id="comments-section">
+    <h3>Comments</h3>
+    <% @blog.comments.each do |comment| %>
+      <div class="comment-box">
+        <p><%= comment.content %></p>
+        <!-- Delete Comment option only if the user is the blog owner -->
+        <% if current_user.id == @blog.user_id %>
+          <div class="blog-actions">
+            <%= button_to "Delete Comment", blog_comment_path(@blog, comment), method: :delete, class: "btn delete-btn", data: { confirm: "Are you sure you want to delete this comment?" } %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <!-- Form to Add a New Comment, if the user is logged in -->
+  <% if user_signed_in? %>
+    <div id="add-comment">
+      <h3>Add a Comment</h3>
+      <%= form_with model: [@blog, @blog.comments.new], local: true do |form| %>
+        <div class="form-group">
+          <%= form.label :content, "Your Comment" %>
+          <%= form.text_area :content, rows: 3, class: "form-control", required: true %>
+        </div>
+        <%= form.submit "Post Comment", class: "btn comment-btn" %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You must be logged in to add a comment.</p>
+  <% end %>
+</body>

@@ -1,0 +1,86 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 32px;
+  }
+
+  .blog-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-field {
+    margin-bottom: 15px;
+  }
+
+  .form-label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .form-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  .form-actions {
+    text-align: center;
+  }
+
+  .form-submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .form-submit:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<h1>New Blog</h1>
+
+<%= form_with model: @blog, class: "blog-form" do |form| %>
+  <div class="form-field">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-input" %>
+  </div>
+
+  <div class="form-field">
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-input" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Create Blog", class: "form-submit" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,35 @@
+<head>
+  <title>New Blog</title>
+</head>
+<body>
+  <h1 class="form-heading">New Blog</h1>
+  
+  <!-- Start the form for creating a new blog -->
+  <%= form_with model: @blog, class: "blog-form", id: "blog-form" do |form| %>
+    
+    <!-- Title Field -->
+    <div class="form-field">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, class: "form-input", id: "blog-title" %>
+      <!-- Title error message -->
+      <div id="title-error" class="error-message">Title is required!</div>
+    </div>
+
+    <!-- Content Field -->
+    <div class="form-field">
+      <%= form.label :content, class: "form-label" %>
+      <%= form.text_area :content, class: "form-input", id: "blog-content" %>
+      <!-- Content error message -->
+      <div id="content-error" class="error-message">Content is required!</div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-actions">
+      <%= form.submit "Create Blog", class: "form-submit", id: "submit-btn" %>
+    </div>
+
+    <!-- Back Link -->
+    <%= link_to "Back", my_page_index_path, class: "back-link" %>
+  
+  <% end %>
+</body>

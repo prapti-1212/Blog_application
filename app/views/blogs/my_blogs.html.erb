@@ -1,0 +1,18 @@
+<h1 class="blog-title">My Blogs</h1>
+<% if @blogs.present? %> <!-- Check if there are any blogs -->
+  <ul class="blog-list">
+    <% @blogs.each do |blog| %> <!-- Loop through each blog -->
+      <li class="blog-item">
+        <h3 class="blog-title-link">
+          <!-- Display blog title as a link that takes the user to the blog show page -->
+          <%= link_to blog.title, blog_path(blog), class: "blog-link" %>
+        </h3>
+        <!-- Display truncated content of the blog (150 characters) -->
+        <p class="blog-content"><%= truncate(blog.content, length: 150) %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <!-- If no blogs are found, display this message -->
+  <p class="no-blogs">No blogs found.</p>
+<% end %>
